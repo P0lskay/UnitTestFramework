@@ -2,23 +2,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <map>
+#include <set>
+#include <vector>
 
 using namespace std;
 
-template <typename V>
-ostream& operator << (ostream& os, const set<V>& st)
-{
-	bool isfirst = truel
-	for (auto& item : st)
-	{
-		if (!isfirst)
-			os << ", ";
-		
-		isfirst = false;
-		os << item;
-	}
-	return os;	
-}
+
 
 template <typename Key, typename Value>
 ostream& operator << (ostream& os, const map<Key, Value>& mp)
@@ -47,8 +37,37 @@ void Assert (bool b, const string& hint)
 	AssertEqual(b, true, hint);
 }
 
+class TestRunner {
+public:
+    ~TestRunner()
+    {
+        if (fail_counter > 0)
+        {
+            cerr << fail_counter << " tests failed!" << endl;
+            exit(1);
+        }
+    }
+
+    template <typename TestFunc>
+    void RunTest(TestFunc func, const string& name_test)
+    {
+        try
+        {
+            func();
+            cerr << name_test << " OK!" << endl;
+        }
+        catch (runtime_error& e)
+        {
+            fail_counter++;
+            cerr << name_test << " is fail: " << e.what() << endl;
+        }
+    }
+private:
+    int fail_counter = 0;
+};
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Hello World!\n";
 }
 
