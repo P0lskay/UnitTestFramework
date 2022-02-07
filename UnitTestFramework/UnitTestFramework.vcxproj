@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="UnitTestFramework.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UnitTestFrameWork.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
